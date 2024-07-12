@@ -5,11 +5,12 @@ const createRemind = async (req, res, next) => {
     const { time, message } = req.body;
   
     const reminder = new Reminder({ time, message });
-  
     try {
       await reminder.save();
-      scheduleNotification(reminder); // Schedule the reminder 5 minutes before the time
-      res.status(201).json({reminders : reminder, status: "success"})
+
+      const reminders = await Reminder.find({})
+      // scheduleNotification(reminder); // Schedule the reminder 5 minutes before the time
+      res.status(201).json({reminders : reminders, status: "success"})
     } catch (error) {
         return next(appErr(error.message, 404));
     }
