@@ -34,7 +34,23 @@ const createRemind = async (req, res, next) => {
     }
   }
 
+  const deleteRemind = async (req, res, next)=>{
+    try {
+      await Reminder.findByIdAndDelete(req.params.id);
+
+      res.status(200).json({
+        status: "success",
+        msg : "Reminder Deleted Successfully"
+      })
+    }
+      catch(error){
+        return next(appErr(error.message, 404));
+      }
+  
+}
+
   module.exports = {
     createRemind,
-    getAllRemind
+    getAllRemind,
+    deleteRemind
   }
