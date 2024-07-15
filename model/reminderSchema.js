@@ -1,14 +1,24 @@
 const mongoose = require('mongoose');
 
 const reminderSchema = new mongoose.Schema({
-  time: {
+  
+  customerName : {
+    type: String,
+    required : true
+  },
+  acBrand : {
+    type: String,
+    required : true
+  },
+  installationDate: {
     type: Date,
     required: true
   },
-  message: {
-    type: String,
+  nextServiceDate: {
+    type: Date,
     required: true
-  }
+  },
+
 });
 
 const Reminder = mongoose.model('Reminder', reminderSchema);

@@ -2,14 +2,13 @@ const Reminder = require('../model/reminderSchema');
 const {appErr } = require('../utils/appErr')
 
 const createRemind = async (req, res, next) => {
-    const { time, message } = req.body;
+    const { customerName, acBrand, installationDate ,nextServiceDate} = req.body;
   
-    const reminder = new Reminder({ time, message });
+    const reminder = new Reminder({ customerName,  acBrand, installationDate ,nextServiceDate });
     try {
       await reminder.save();
 
       const reminders = await Reminder.find({})
-      // scheduleNotification(reminder); // Schedule the reminder 5 minutes before the time
       res.status(201).json({reminders : reminders, status: "success"})
     } catch (error) {
         return next(appErr(error.message, 404));
