@@ -72,6 +72,7 @@ const deleteRemind = async (req, res, next) => {
 };
 
 const updateRemind = async (req, res, next) =>{
+  const {customerName, acBrand, installationDate,nextServiceDate} = req.body
   try {
     const reminder = await Reminder.findByIdAndUpdate( req.params.id, {
       customerName,
